@@ -4,12 +4,14 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <>
-      <h1 style={{color:"black"}}>hello</h1>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-      </Routes>
-    </>
+  
+    <Router>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      
+    </Routes>
+  </Router>
+  
 
   )
 }
