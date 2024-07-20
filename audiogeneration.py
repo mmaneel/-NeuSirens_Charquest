@@ -8,6 +8,8 @@ Original file is located at
 """
 
 #!pip install fastapi uvicorn pyngrok requests pandas g4f curl_cffi
+#!pip install -U g4f[all]
+#!ngrok authtoken "2jVlZ2YbiSz3y0q6fjq9XlqeLW5_37awR2fZksvpMcDHPtxCF"
 import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -17,6 +19,10 @@ import pandas as pd
 import json
 import requests
 from pyngrok import ngrok
+import nest_asyncio
+
+# Apply nest_asyncio
+nest_asyncio.apply()
 
 # Define a Pydantic model for request validation
 class RequestModel(BaseModel):
@@ -27,27 +33,27 @@ app = FastAPI()
 @app.post("/generateAudio")
 def generate_questions(request: RequestModel):
     client = Client()
-
+    
     # Define prompts based on type
     category_prompts = {
         "Introductions": "Generate a story where a character introduces themselves in different scenarios.",
         "Emotions": "Generate a story where a character experiences and expresses various emotions.",
         "Daily activities": "Generate a story about a character's daily activities and routines.",
-        "Adventure telling": "Generate a story where a character goes on an exciting real-life adventures",
+        "Adventure telling": "Generate a story where a character goes on an exciting real-life adventure",
         "Problem Solving": "Generate a story where a character encounters and solves various problems."
     }
-
+    
     # Use the category to get the specific prompt
     prompt_category = category_prompts.get(request.type, category_prompts["Adventure telling"])
     prompt = f"{prompt_category} The story should be detailed and engaging, using simple language suitable for children. Use the pronoun 'I' to narrate the story."
-
+    
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
     )
-
+    
     story_output = response.choices[0].message.content
-
+    
     prompt_for_questions = (
         "Generate a list of questions based on the following story. The response should be a string with each question formatted as follows:\n"
         "1. [Question Text]\n"
@@ -62,11 +68,11 @@ def generate_questions(request: RequestModel):
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt_for_questions}],
     )
-
+    
     questions = response.choices[0].message.content
     print(type(questions))
     print("Questions received from API:", questions)
-
+    
     # Define regex pattern for extracting questions, options, and correct answers
     pattern = re.compile(r"(\d+\. .*?)\n((?:\s+[a-z]\) .*\n?)+)\s+\*\*Correct Answer:\*\* ([a-z])\) (.+)")
 
@@ -78,7 +84,7 @@ def generate_questions(request: RequestModel):
         question_text, options_block, correct_option_letter, correct_option_text = match
         options = re.findall(r"([a-z])\) (.+)", options_block)
         options_list = [{"letter": option[0], "text": option[1]} for option in options]
-
+    
         questionlist.append({
             "question": question_text.strip(),
             "options": options_list,
@@ -87,9 +93,9 @@ def generate_questions(request: RequestModel):
                 "text": correct_option_text
             }
         })
-
+    
     df = pd.DataFrame(questionlist)
-
+    
     # Generate audio for the story using Unreal Speech API
     url = "https://api.v7.unrealspeech.com/speech"
     payload = {
@@ -103,14 +109,14 @@ def generate_questions(request: RequestModel):
     headers = {
         "accept": "application/json",
         "content-type": "application/json",
-        "Authorization": "Bearer G6NglPQUes4Wi4bN0Y6AQZVxjPmz5XiVQCCXpV42W7USUpm4HDpCEA"
+        "Authorization": "Bearer G6NglPQUes4Wi4bN0Y6AQZVxjPmz5XiVQCCXpV42W7USUpm4HDpCEA" 
     }
-
+    
     response = requests.post(url, json=payload, headers=headers)
-
+    
     response_data = json.loads(response.text)
     output_uri = response_data["OutputUri"]
-
+    
     return {"questions": questionlist, "audio_url": output_uri}
 
 # Start Ngrok tunnel
@@ -118,7 +124,4 @@ public_url = ngrok.connect(8000)
 print("Public URL:", public_url)
 
 # Run the server
-def run():
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-
-run()
+uvicorn.run(app, host="0.0.0.0", port=8000)
