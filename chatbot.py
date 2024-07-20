@@ -1,7 +1,7 @@
 import openai
 
 # Set your API key
-openai.api_key = 'sk-proj-bLTgqWaRlInsTAhCVmjnT3BlbkFJV80QLSvihnjCTbS690Yb'
+openai.api_key = 'key_telegram'
 
 def get_response(messages):
     response = openai.ChatCompletion.create(
