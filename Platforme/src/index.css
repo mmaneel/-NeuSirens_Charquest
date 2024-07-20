@@ -18,3 +18,20 @@
 
   --container-padding: 4.8rem;
 }
+
+button {
+  all: unset
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  scale: 0.9;
+}
+
+button:disabled{
+opacity: 0.4;
+cursor: not-allowed;
+}

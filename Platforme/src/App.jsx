@@ -1,3 +1,4 @@
+import Header from './Components/Header/Header';
 import HomePage from './Interfaces/HomePage/HomePage'
 import { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -7,7 +8,7 @@ function App() {
   
     <Router>
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<Header />} />
       
     </Routes>
   </Router>
