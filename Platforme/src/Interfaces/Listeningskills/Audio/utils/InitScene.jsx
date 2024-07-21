@@ -55,7 +55,7 @@ export default class SceneInit {
     this.container.appendChild(canvas);
     // Set the background color of the scene to #EBADEE
     // Set the background color of the scene to #EBADEE
-    this.scene.background = new THREE.Color(0xEBADEE);
+    this.scene.background = new THREE.Color(0xFFFFFF);
  
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);

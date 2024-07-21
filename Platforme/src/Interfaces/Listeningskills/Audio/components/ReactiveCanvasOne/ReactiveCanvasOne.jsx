@@ -116,9 +116,9 @@ export default function ReactiveCanvasOne({url}) {
     const uniforms = {
       u_amplitude: { type: "f", value: 80.0 },
       u_data_arr: { type: "float[64]", value: dataArray },
-      u_color_r: { type: "f", value: 38.0 },
+      u_color_r: { type: "f", value: 50.0 },
       u_color_g: { type: "f", value: 0.0 },
-      u_color_b: { type: "f", value: 32.0 },
+      u_color_b: { type: "f", value: 50.0 },
     };
 
     const choseShape = (currentShape) => {
@@ -192,9 +192,10 @@ export default function ReactiveCanvasOne({url}) {
 
   return (
     <div className="main" >
-      <button onClick={handleAudioContextStart}>Start Audio</button> {/* Button to start audio */}
       <div className="contains">
-        
+      <div className="butcont">
+      <button onClick={handleAudioContextStart}>Start Audio</button> {/* Button to start audio */}
+      </div>
        <div className="reactive-canvas__container" id="canvas-container">
         <canvas id="myThreeJsCanvas"></canvas>
       </div>

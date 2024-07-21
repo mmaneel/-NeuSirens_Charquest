@@ -10,7 +10,7 @@ function Listen() {
   const [url, seturl] = useState("null");
   const postData = async () => {
     try {
-      const response = await axios.post('https://4371-34-74-201-11.ngrok-free.app/generateAudio', {
+      const response = await axios.post('https://cb62-34-74-201-11.ngrok-free.app/generateAudio', {
         type: 'Emotions',
       });
       console.log(response.data); // Print the response to the console
@@ -28,7 +28,7 @@ function Listen() {
   return (
     <div className="Listen">
      <Header/>
-     <MainUI url={url}/>
+     <MainUI url={url} Data={data}/>
 
     </div>
   );

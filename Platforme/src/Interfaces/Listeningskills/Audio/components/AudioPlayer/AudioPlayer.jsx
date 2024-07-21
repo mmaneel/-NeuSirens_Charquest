@@ -51,9 +51,7 @@ const AudioPlayer = ({url, togglePlay, setComponentState }) => {
           ref={audioRef}
         ></audio>
       </div>
-      <div>
-        <button id="but">Next</button>
-      </div>
+     
     </div>
   );
 };
