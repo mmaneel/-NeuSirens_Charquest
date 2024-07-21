@@ -1,0 +1,22 @@
+@use "../../styles/variables.scss" as *;
+@use "../../styles/mixins.scss" as mixin;
+
+.audio-uploader {
+  @include mixin.audio-card;
+
+  &__form-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__options {
+    @include mixin.audio-card-nav;
+  }
+
+  &__icon:hover {
+    color: var(--primary);
+    cursor: pointer;
+    transform: scale(1.1)
+  }
+}

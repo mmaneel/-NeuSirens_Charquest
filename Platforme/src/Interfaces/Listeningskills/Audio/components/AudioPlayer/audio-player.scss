@@ -1,0 +1,31 @@
+@use "../../styles/variables.scss"as *;
+@use "../../styles/mixins.scss"as mixin;
+
+
+.audio-player {
+    background-color: #EBADEE !important;
+    @include mixin.audio-card;
+
+
+    &__options {
+        @include mixin.audio-card-nav;
+    }
+
+    &__icon:hover {
+        color: var(--primary);
+        cursor: pointer;
+        transform: scale(1.1)
+    }
+}
+#but{
+    background-color: #54A2FF;
+    width: 100px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    font-family: poppins;
+}

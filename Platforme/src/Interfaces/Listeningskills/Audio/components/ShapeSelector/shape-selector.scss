@@ -1,0 +1,32 @@
+@use "../../styles/variables.scss"as *;
+@use "../../styles/mixins.scss"as mixin;
+
+.shape-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+
+    &__img-container {
+        width: 33%;
+    }
+
+    &__img {
+        max-width: 100px;
+        height: 100px;
+        object-fit: cover;
+       border-radius: 10px;
+    }
+
+    &__img:hover {
+        cursor: pointer;
+        transform: scale(1.05)
+    }
+
+}
+
+.--selected {
+    border: 5px solid var(--primary);
+    transform: scale(1.05);
+}

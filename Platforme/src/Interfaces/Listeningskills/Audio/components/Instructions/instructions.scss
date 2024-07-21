@@ -1,0 +1,13 @@
+@use "../../styles/variables.scss"as *;
+@use "../../styles/mixins.scss"as mixin;
+
+
+.instructions {
+    @include mixin.audio-card;
+    flex-direction: row;
+    gap: 4rem;
+    justify-content: flex-start;
+
+    background-color: #EBADEE;
+
+}

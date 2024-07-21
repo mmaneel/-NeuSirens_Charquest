@@ -1,0 +1,31 @@
+.reactive-canvas__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh; /* Full viewport height to center vertically */
+    width: 70vw;  /* Full viewport width to center horizontally */
+    background-color: #EBADEE; /* Set background color if needed */
+  }
+  .main{
+    color: #EBADEE;
+    background-color: #EBADEE;
+    height: 100vh; /* Full viewport height to center vertically */
+    width: 100vw;
+    display: flex;
+     justify-content: center; /* Center horizontally */
+    align-items: center;
+
+  }
+  #myThreeJsCanvas {
+    width: 40%;
+    height: 40%;
+  }
+  .contains{
+    width: 70%;
+  }
+  
+  
+
+
+
+
